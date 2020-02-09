@@ -1,0 +1,111 @@
+\section{Plotting Signals}
+\subsection{Q1.1}
+In this section, I show you how to implement \textbf{unit step}
+ and \textbf{impulse} function and how to plot them 
+ with the different sampling rates with the use of 
+ \textbf{Numpy} and \textbf{Matplotlib} in python.
+\subsubsection{Unit Step}
+
+\paragraph{} Unit step is a signal with magnitude one for time greater than zero . We can assume it as a dc signal which got switched on at time equal to zero.
+this is the mathematical definition of unit step:
+
+ \begin{align}
+  x(t) = \begin{cases}
+   0 &: t<0\\
+   1 &: t\geq 0\end{cases}
+ \end{align}
+
+ \paragraph{}The unit step function as it is shown in the
+  \textbf{Listing \ref{list:unit_step}}, takes one \textbf{Numpy} 
+  array or simple list as an input(samples of the time) and then
+  return a list of output. this is list comprehension in 
+  Python that iterates through time samples and for each 
+  time samples if the sample is less than 0 it returns 
+  0 and otherwise returns 1(this is the exact definition 
+  of the unit step function). 
+
+\pythonexternal[caption={\textbf{unit step} Signal},label={list:unit_step}]{codes/unit_step.py}
+
+\paragraph{}for the next part, we are using the function that was defined to 
+plot the diagrams for sampling rates of  $F_s=100$ and 
+$F_s=1000$(\textbf{Listing \ref{list:q1_1_unit}}). the code is 
+straightforward. first, it makes two grid in a row, and gets 
+two axes and drawing the unit function with $F_s=100$ in the 
+first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \ref{fig:Q1-1-unit}}.
+
+\pythonexternal[caption={Plotting \textbf{unit step} with two sampling rates}, label={list:q1_1_unit}]{codes/Q1_1_unit.py}
+
+\begin{figure}[H]
+  \scalebox{0.6}{\input{images/Q1-1-unit.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_1_unit}}}
+  \label{fig:Q1-1-unit}
+\end{figure}
+
+\subsubsection{Impulse}
+\paragraph{}The pulse function, also called the impulse function, 
+in DT is easy: everywhere zero except at n=0 where the 
+values is 1. The DT pulse is written as $\delta[n]$.
+
+In CT it is more difficult. The pulse in CT is written 
+as $\delta(t)$. It is mathematically defined with the sifting property:
+
+\begin{align}
+x(0) = \int_{-\infty}^{\infty} x(t)\delta(t)dt
+\end{align}
+
+\paragraph{}A usefull way to think about a pulse signal 
+is to consider a signal in which you want to concentrate 
+a finite amount of energy in a short a time interval as 
+possible. Energy in a signal is measured by integrating a 
+signal over a period of time.
+
+Consider for instance the signal $x_a(t)$ defined as:
+
+\begin{align}    
+\begin{split}x_a(t) = \begin{cases}
+       \frac{1}{2a} &: -a \leq t \leq a\\
+       0 &: \text{elsewhere}
+       \end{cases}\end{split}
+\end{align}
+
+\paragraph{}The total energy in this signal is 1 
+(the integral of $x(t)$ over the entire domain). 
+This is true irrespective of the value of a. In the 
+limit when $a\rightarrow 0$ the value $x_a(0)\rightarrow \infty$ but still the total 
+area under the function remains 1. In a sloppy way we 
+may define:
+\[
+    \delta(t) = \lim_{a\rightarrow0} x_a(t)
+    \]
+\paragraph{}For the implementation of the Impulse signal in python, 
+we are using this sloppy definition. Because even for 
+plotting continuous-time signals in python, we use 
+an array of time samples. So we are going to implement 
+the Impulse approximately by considering our sampling rate.
+
+\paragraph{}The implementation has shown in 
+\textbf{Listing \ref{list:impulse}}. The function takes four inputs. 
+The first one is the array or list of time samples, 
+the second and third ones are low-bound and upper-bound 
+of the time samples and the fourth one is the number of 
+sampling. The function uses these arguments in addition 
+to the first one(array of time samples) to find the 
+closest samples to zero in lesser time that is needed. 
+after finding those time samples create the smallest 
+rectangular signal in a way that its integral becomes 1.
+
+\pythonexternal[caption={\textbf{Impulse} Signal implementation},label={list:impulse}]{codes/impulse.py}
+
+\paragraph{}For the next part, we are using the function that was defined to 
+plot the diagrams for sampling rates of  $F_s=100$ and 
+$F_s=1000$(\textbf{Listing \ref{list:q1_1_delta}}). the code is 
+straightforward. first, it makes two grid in a row, and gets 
+two axes and drawing the unit function with $F_s=100$ in the 
+first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \ref{fig:Q1-1-impulse}}.
+\pythonexternal[caption={Plotting \textbf{impulse} with two sampling rates}, label={list:q1_1_delta}]{codes/Q1_1_delta.py}
+\begin{figure}[H]
+  \scalebox{0.6}{\input{images/Q1-1-delta.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_1_delta}}}
+  \label{fig:Q1-1-impulse}
+\end{figure}
+\subsection{Q1.2}
