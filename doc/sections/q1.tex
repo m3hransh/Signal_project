@@ -1,12 +1,14 @@
 \section{Plotting Signals}
 \subsection{Q1.1}
 In this section, I show you how to implement \textbf{unit step}
- and \textbf{impulse} function and how to plot them 
+ and \textbf{ramp} function and how to plot them 
  with the different sampling rates with the use of 
  \textbf{Numpy} and \textbf{Matplotlib} in python.
 \subsubsection{Unit Step}
 
-\paragraph{} Unit step is a signal with magnitude one for time greater than zero . We can assume it as a dc signal which got switched on at time equal to zero.
+\paragraph{} Unit step is a signal with magnitude one 
+for time greater than zero . We can assume it as a dc 
+signal which got switched on at time equal to zero.
 this is the mathematical definition of unit step:
 
  \begin{align}
@@ -17,18 +19,18 @@ this is the mathematical definition of unit step:
 
  \paragraph{}The unit step function as it is shown in the
   \textbf{Listing \ref{list:unit_step}}, takes one \textbf{Numpy} 
-  array or simple list as an input(samples of the time) and then
+  array or simple list as an input (samples of the time) and then
   return a list of output. this is list comprehension in 
   Python that iterates through time samples and for each 
   time samples if the sample is less than 0 it returns 
-  0 and otherwise returns 1(this is the exact definition 
+  0 and otherwise returns 1 (this is the exact definition 
   of the unit step function). 
 
 \pythonexternal[caption={\textbf{unit step} Signal},label={list:unit_step}]{codes/unit_step.py}
 
 \paragraph{}for the next part, we are using the function that was defined to 
 plot the diagrams for sampling rates of  $F_s=100$ and 
-$F_s=1000$(\textbf{Listing \ref{list:q1_1_unit}}). the code is 
+$F_s=1000$ (\textbf{Listing \ref{list:q1_1_unit}}). the code is 
 straightforward. first, it makes two grid in a row, and gets 
 two axes and drawing the unit function with $F_s=100$ in the 
 first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \ref{fig:Q1-1-unit}}.
@@ -41,71 +43,189 @@ first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \r
   \label{fig:Q1-1-unit}
 \end{figure}
 
-\subsubsection{Impulse}
-\paragraph{}The pulse function, also called the impulse function, 
-in DT is easy: everywhere zero except at n=0 where the 
-values is 1. The DT pulse is written as $\delta[n]$.
-
-In CT it is more difficult. The pulse in CT is written 
-as $\delta(t)$. It is mathematically defined with the sifting property:
+\subsubsection{Ramp}
+\paragraph{}The ramp signal definition is shown in expression
+ 2. For the negative values, it returns zero and otherwise 
+ returns the value of the input. The implementation is also 
+ straightforward as the definition. You can see the 
+ implementation in python in \textbf{Listing \ref{list:ramp}}. 
+ The function takes one input as a simple list or 
+ \textbf{Numpy} array and returns the output list in the same 
+ structure that has explained for the unit signal implementation.   
 
 \begin{align}
-x(0) = \int_{-\infty}^{\infty} x(t)\delta(t)dt
-\end{align}
-
-\paragraph{}A usefull way to think about a pulse signal 
-is to consider a signal in which you want to concentrate 
-a finite amount of energy in a short a time interval as 
-possible. Energy in a signal is measured by integrating a 
-signal over a period of time.
-
-Consider for instance the signal $x_a(t)$ defined as:
-
-\begin{align}    
-\begin{split}x_a(t) = \begin{cases}
-       \frac{1}{2a} &: -a \leq t \leq a\\
-       0 &: \text{elsewhere}
-       \end{cases}\end{split}
-\end{align}
-
-\paragraph{}The total energy in this signal is 1 
-(the integral of $x(t)$ over the entire domain). 
-This is true irrespective of the value of a. In the 
-limit when $a\rightarrow 0$ the value $x_a(0)\rightarrow \infty$ but still the total 
-area under the function remains 1. In a sloppy way we 
-may define:
-\[
-    \delta(t) = \lim_{a\rightarrow0} x_a(t)
-    \]
-\paragraph{}For the implementation of the Impulse signal in python, 
-we are using this sloppy definition. Because even for 
-plotting continuous-time signals in python, we use 
-an array of time samples. So we are going to implement 
-the Impulse approximately by considering our sampling rate.
-
-\paragraph{}The implementation has shown in 
-\textbf{Listing \ref{list:impulse}}. The function takes four inputs. 
-The first one is the array or list of time samples, 
-the second and third ones are low-bound and upper-bound 
-of the time samples and the fourth one is the number of 
-sampling. The function uses these arguments in addition 
-to the first one(array of time samples) to find the 
-closest samples to zero in lesser time that is needed. 
-after finding those time samples create the smallest 
-rectangular signal in a way that its integral becomes 1.
-
-\pythonexternal[caption={\textbf{Impulse} Signal implementation},label={list:impulse}]{codes/impulse.py}
+  x(t) = \begin{cases}
+   x &: x\geq 0\\
+   0 &: x< 0\end{cases}
+ \end{align}
+\pythonexternal[caption={\textbf{Ramp} Signal implementation},label={list:ramp}]{codes/ramp.py}
 
 \paragraph{}For the next part, we are using the function that was defined to 
-plot the diagrams for sampling rates of  $F_s=100$ and 
-$F_s=1000$(\textbf{Listing \ref{list:q1_1_delta}}). the code is 
+plot graphs for sampling rates of  $F_s=100$ and 
+$F_s=1000$ (\textbf{Listing \ref{list:q1_1_ramp}}). the code is 
 straightforward. first, it makes two grid in a row, and gets 
 two axes and drawing the unit function with $F_s=100$ in the 
-first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \ref{fig:Q1-1-impulse}}.
-\pythonexternal[caption={Plotting \textbf{impulse} with two sampling rates}, label={list:q1_1_delta}]{codes/Q1_1_delta.py}
+first axis and $F_s=1000$ in the second one. plots is shown in \textbf{Figure \ref{fig:Q1-1-ramp}}.
+\pythonexternal[caption={Plotting \textbf{ramp} with two sampling rates}, label={list:q1_1_ramp}]{codes/Q1_1_ramp.py}
+
 \begin{figure}[H]
-  \scalebox{0.6}{\input{images/Q1-1-delta.pgf}}
-  \caption{Graph result of the \textbf{Listing \ref{list:q1_1_delta}}}
-  \label{fig:Q1-1-impulse}
+  \scalebox{0.6}{\input{images/Q1-1-ramp.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_1_ramp}}}
+  \label{fig:Q1-1-ramp}
 \end{figure}
+
 \subsection{Q1.2}
+
+\paragraph{}In this part, we are going to plot an example 
+graph using what we have defined before. The example has 
+shown in the \textbf{Figure \ref{fig:ex1}}.
+
+\begin{figure}[H]
+ \centering
+\begin{tikzpicture}
+\begin{axis}[
+	axis x line=center,
+	axis y line=center,
+	tick align=outside,
+	enlargelimits=false
+]
+	\addplot coordinates {
+      (-4,0)
+      (-2,0)
+      (-1,-1)
+      (0,1)
+      (2,1)
+      (2,0)
+      (4,0)
+  };
+\end{axis}
+\end{tikzpicture}
+\caption{example graph of the siganl $x(t)$}
+  \label{fig:ex1}
+\end{figure}
+
+\paragraph{}So now, we define our graph using ramp and unit 
+signal and plot them using that definition in Python. We 
+split our graph into three parts. our first part is from 
+$-\infty$ to -1 that is equal to $-r(t+2) * u(-t-1)$. The 
+second part is from -1 to 0 that is equal to $(r(2*t+2)-1) *(u(t+1)-u(-t))$
+. The third part is from 0 to $\infty$ that is equal to 
+$u(t) -u(t-2)$. Our final definition for our signal is :
+\begin{align}
+  x(t) = -r(t+2) * u(-t-1) + (r(2*t+2)-1) *(u(t+1)-u(-t)) + u(t) -u(t-2)
+ \end{align}
+ \paragraph{}The implementation of the signal in Python
+  has shown in the \textbf{Listing \ref{list:q1_2_ex1}}. First, each 
+  part calculated separately, and then the main signal 
+  is plotted as the sum of each part. The result of code 
+  also has shown in the \textbf{Figure \ref{fig:Q1-2-ex1}}.
+
+
+\pythonexternal[caption={Plotting signal $x(t)$ and its parts}, label={list:q1_2_ex1}]{codes/Q1_2_ex1.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q1-2-ex1.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_2_ex1}}}
+  \label{fig:Q1-2-ex1}
+\end{figure}
+
+\subsection{Q1.3}
+
+\paragraph{}In this part, we are going to plot the 
+signal $y(t)$ that has shown in the 
+\textbf{Figure \ref{fig:ex2}}. we can find the signal 
+$y(t)$ concerning $x(t)$ that has defined in the 
+previous section. We can find $y(t)$ by doing some 
+transformation on $x(t)$. One way to see it is to 
+first shift $x(t)$ 2 unit to the left and then 
+compress it with the scale number of 2.
+
+\begin{figure}[H]
+ \centering
+\begin{tikzpicture}
+\begin{axis}[
+	axis x line=center,
+	axis y line=center,
+	tick align=outside,
+	enlargelimits=false
+]
+	\addplot coordinates {
+      (-4,0)
+      (-2,0)
+      (-1.5,-1)
+      (-1,1)
+      (0,1)
+      (0,0)
+      (2,0)
+  };
+\end{axis}
+\end{tikzpicture}
+\caption{example graph of the siganl $y(t)$}
+  \label{fig:ex2}
+\end{figure}
+\paragraph{}
+So we can easily find $y(t)$ in respect to $x(t)$ 
+just that is $y(t) = x(2t+2)$. For implementation 
+in Python we do the same. after defining function 
+$x(t)$ we find $y(t)$ in a same manner. The code 
+has shown in \textbf{Listing \ref{list:q1_3_ex2}}. And the 
+corospnding graph result has shown in 
+\textbf{Figure \ref{fig:Q1-3-ex2}}.
+\pythonexternal[caption={Plotting signal $y(t)$ }, label={list:q1_3_ex2}]{codes/Q1_3_ex2.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.6}{\input{images/Q1-3-ex2.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_3_ex2}}}
+  \label{fig:Q1-3-ex2}
+\end{figure}
+
+\subsection{Q1.4}
+
+\paragraph{}In this part, we are going to plot another
+signal, $y_2(t)$ that has shown in the 
+\textbf{Figure \ref{fig:ex3}}. The process is like 
+the previous section. We can find $y_2(t)$ by first shifting 
+the $x(t)$ to the left and then mirror it with respect 
+to y axis.
+
+\begin{figure}[H]
+ \centering
+\begin{tikzpicture}
+\begin{axis}[
+	axis x line=center,
+	axis y line=center,
+	tick align=outside,
+	enlargelimits=false
+]
+	\addplot coordinates {
+      (-3,0)
+      (-1,0)
+      (-1,1)
+      (1,1)
+      (2,-1)
+      (3,0)
+      (4,0)
+  };
+\end{axis}
+\end{tikzpicture}
+\caption{example graph of the siganl $y_2(t)$}
+  \label{fig:ex3}
+\end{figure}
+\paragraph{}
+So we can easily find $y_2(t)$ with respect to $x(t)$ 
+that is $y_2(t) = x(-t+1)$. For implementation 
+in Python we do the same. after defining function 
+$x(t)$ we find $y_2(t)$ in a same manner. The code 
+has shown in \textbf{Listing \ref{list:q1_4_ex3}}. And the 
+corospnding graph result has shown in 
+\textbf{Figure \ref{fig:Q1-4-ex3}}.
+\pythonexternal[caption={Plotting signal $y_2(t)$ }, label={list:q1_4_ex3}]{codes/Q1_4_ex3.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.6}{\input{images/Q1-4-ex3.pgf}}
+  \caption{Graph result of the \textbf{Listing \ref{list:q1_4_ex3}}}
+  \label{fig:Q1-4-ex3}
+\end{figure}
