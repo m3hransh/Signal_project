@@ -1,2 +1,93 @@
 \section{Signal Analysis}
-This is answer to Question2
+\paragraph{}In this section, we will define some 
+simple systems with one input signal and one output 
+signal. After defining them, we will evaluate its 
+response to the signal $x(t)$ that defined in the
+ previous section.
+ \begin{center}
+\begin{tabular}{ p{5cm} p{5cm} }
+ $x_e[n]=\frac{x[n]-x[-n]}{2}$ & $x_e[n]=\frac{x[n]+x[-n]}{2}$  \\ 
+  & \\
+ $
+  x_t[n] = \begin{cases}
+   x[n] &: n < 0\\
+   0 &: o.w\end{cases}
+ $ & $
+  x_r[n] = \begin{cases}
+   x[n] &: n\geq 0\\
+   0 &: o.w\end{cases}
+ $  \\  
+ 
+\end{tabular}
+\end{center}
+\paragraph{}For implementation in Python, first, we 
+define functions for each expression above with one input 
+function that returns a corresponding response 
+function. The code has shown in the 
+\textbf{Listing \ref{list:q2_def}}. Take note that each function 
+returns a one-line lambda function.
+After that in the following lines, each 
+of them invokes using signal $x(t)$ as an input 
+function that returns the corresponding response 
+function as an output.
+
+\pythonexternal[caption={Definition of systems in Python}, label={list:q2_def}]{codes/Q2_def.py}
+
+\subsection{Q2.1}
+\paragraph{}Now lets, plot them with 
+\textbf{Pyplot}. The code is in 
+\textbf{Listing \ref{list:q2_1}}. In the first line, 
+a grid with two rows and two columns has defined.
+ And each signal has plotted in each cell of the grid (result graphs in \textbf{Figure \ref{fig:Q2_1}}).
+
+\pythonexternal[caption={plotting response function of each system to $x(t)$}, label={list:q2_1}]{codes/Q2_1.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q2-1.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q2_1}}}
+  \label{fig:Q2_1}
+\end{figure}
+
+\subsection{Q2.2}
+\paragraph{}Let, see if we can rebuild signal 
+$x(t)$ from signals $x_e(t)$ and $x_r(t)$. We 
+know that $x_e(t)$ is even part of the signal 
+$x(t)$ so if we find the odd part of the signal 
+from $x_r(t)$, we can regenerate $x(t)$. if we 
+subtract signal $x_e(t)$ from $x_r(t)$ when n>=0 
+we will find the odd part of the signal $x(t)$ and
+ we can also find negative values of odd signals that is 
+ negetive mirror of its positive values. So siganl x(t) is : 
+
+ \begin{align}
+  x(t) = \begin{cases}
+  x_r(t) &: t \geq 0\\
+  x_e(t) -x_r(-t)+x_e(-t)&: o.w\end{cases}
+ \end{align}
+\paragraph{}The implementation has shown 
+in \textbf{Listing \ref{list:q2_2}}. The generated 
+$x(t)$ has defined using the definition above and 
+then, the regenerated and original $x(t)$ have 
+plotted in a figure with two axes in a row.
+ \pythonexternal[caption={Regneerating signal $x(t)$ from $x_e(t)$ and $x_r(t)$}, label={list:q2_2}]{codes/Q2_2.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q2-2.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q2_2}}}
+  \label{fig:Q2_2}
+\end{figure}
+
+\subsection{Q2.3}
+\paragraph{}Now, let's see if we can also regenerate 
+signal $x(t)$ from signals $x_o(t)$ and $x_t(t)$. We 
+can use the same logic, we have the $x(t)$ values for 
+$t<0$ and we can find the even part of the $x(t)$ 
+by subtracting $x_o(t)$ from $x_t(t)$ and using the 
+symmetry property of the even functions to find even 
+part for positive values of t. But the only problem 
+that still remains is that we don't know the value of 
+$x(t)$ for $t=0$ and its value is not in $x_o(t)$ nor 
+$x_t(t)$. So it is impossible to regenrate the exact 
+$x(t)$.
