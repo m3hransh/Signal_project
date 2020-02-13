@@ -1,2 +1,82 @@
 \section{Systems}
-This is the answer to Question3
+\paragraph{}In this section, a system has been defined. 
+The definition has been shown below:
+\begin{align}
+    y(t) = \int_{-\infty}^{+\infty} e^{u-t}x(u-2) du
+    \label{y}
+\end{align}
+\subsection{Q3.1}
+\paragraph{}Now, we are going to show if the system has 
+a superposition property. To prove that we will show that
+ $S\{a_1x_1(t)+a_2x_2(t)\}$ and $S\{a_1x_1(t)\}+
+ S\{a_2x_2(t)\}$ give us same result. ($ x_1(t)$ and 
+ $x_2(t)$ has been defined below)
+ \begin{align}
+    x_1(t) = u(t)-u(t-2) \label{x_1}\\
+    x_2(t) = u(t)-u(t-3)
+    \label{x_2}
+\end{align}
+\paragraph{}For implementing the system in Python we 
+will do the same as the before. First, defining a 
+function that has an input function and returns an 
+output function with the use of lambda expression in 
+Python. For the Integrating part of it, I have 
+used \textbf{SciPy}. For importing the Integral, I 
+have used the line below at the top of my code.
+\begin{python}
+import scipy.integrate as integrate
+\end{python}
+\paragraph{}The Implementation is straightforward 
+(\textbf{Listing \ref{list:q3_1}}). I have chosen $a_1$ as 3 and 
+$a_2$ as 2 and after defining the $x_1$ and $x_2$, 
+$S\{a_1x_1(t)+a_2x_2(t)\}$ and $S\{a_1x_1(t)\}+ 
+S\{a_2x_2(t)\}$ has been defined. Then they have 
+plotted in a row and the result has been shown in 
+the \textbf{Figure \ref{fig:Q3_1}}.
+\pythonexternal[caption={plotting response function of the system to $S\{a_1x_1(t)+a_2x_2(t)\}$ and $S\{a_1x_1(t)\}+ 
+S\{a_2x_2(t)\}$}, label={list:q3_1}]{codes/Q3_1.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q3-1.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q3_1}}}
+  \label{fig:Q3_1}
+\end{figure}
+
+\subsection{Q3.2}
+
+\paragraph{}In the previous section, we have shown by example 
+that the system of equation \ref{y} is Linear. In this
+ section, we will show by example if the system is also
+  \textbf{time-invariant}. Imagine $y_1(t)$ be the 
+  response function of $x_1(t)$ in the equation 
+  \ref{x_1} and $y_2(t)$ be the response function 
+  of system to $x_1(t-3)$. We will show that both are 
+  the same and this is in compliance with the 
+  time-invariant property of the system.
+
+\paragraph{}Implementation In python is also simple as 
+it's shown in the \textbf{Listing \ref{list:q3_2}}. First the 
+$y_1(t)$ and the $y_2(t)$ signal has been defined 
+using $y$ system and $x_1$ signal that has been 
+defined in \textbf{ Listing \ref{list:q3_1}} in the previous 
+section. The result also has been shown in the 
+\textbf{Figure \ref{fig:Q3_2}}. As you can see, both of them 
+are the same.
+
+\pythonexternal[caption={plotting response function of the system to $S\{a_1x_1(t)+a_2x_2(t)\}$ and $S\{a_1x_1(t)\}+ 
+S\{a_2x_2(t)\}$}, label={list:q3_2}]{codes/Q3_2.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q3-2.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q3_2}}}
+  \label{fig:Q3_2}
+\end{figure}
+\subsection{Q3.3}
+\paragraph{}In two previous sections, we have shown 
+the \textbf{linearity} and \textbf{time-invariant}
+ property of the system in equation \ref{y}. Although 
+ we haven't proven those properties, we have shown 
+ instances that comply with those. So we can say that 
+ the system is \textbf{LTI}.

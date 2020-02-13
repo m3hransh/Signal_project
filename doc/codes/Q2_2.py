@@ -1,7 +1,4 @@
-# Definition of the x(t) signal as a lambda function
-x = lambda t : -ramp(t+2) *unit(-t-1) +\
-               (ramp(2*t+2)-1) * (unit(t+1)-unit(t)) +\
-               unit(t) - unit(t-2)
+
 fx_e = lambda x: lambda n: (x(n) + x(-n))/2
 fx_r = lambda x: lambda n: np.array([x(np.array([i]))[0] if i>=0 else 0 for i in n])
 x_e = fx_e(x)
@@ -14,7 +11,7 @@ xg = lambda t: np.concatenate((nx(np.array([i for i in t if i<0])),x_r(np.array(
 
 # Sampling with rate of 100
 t = np.linspace(-4,4,800)
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(12,6))
+fig, (ax1,ax2) = plt.subplots(1,2,figsize=(16,6))
 
 # Plotting original x(t)
 ax1.plot(t, x(t))

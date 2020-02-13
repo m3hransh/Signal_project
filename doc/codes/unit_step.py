@@ -1,2 +1,6 @@
 def unit(x):
-    return np.array([0 if i<0 else 1 for i in x ])
+    # To support scalar values
+    if isinstance(x, Iterable):
+        return np.array([int(i>=0) for i in x ])
+    else:
+        return int(x>=0)

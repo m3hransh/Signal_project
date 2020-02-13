@@ -10,17 +10,25 @@ matplotlib.rcParams.update({
 # %%
 import numpy as np  
 import matplotlib.pyplot as plt 
+from collections.abc import Iterable
 
 # %% 
 #section:unit_step
 def unit(x):
-    return np.array([0 if i<0 else 1 for i in x ])
+    # To support scalar values
+    if isinstance(x, Iterable):
+        return np.array([int(i>=0) for i in x ])
+    else:
+        return int(x>=0)
 #endsection
 
 # %%
 #section:ramp
 def ramp(x):
-    return np.array([0 if i<0 else i for i in x])
+    if isinstance(x,Iterable):
+        return np.array([0 if i<0 else i for i in x])
+    else:
+        return 0 if x<0 else x
 #endsection
 
 #%%

@@ -1,9 +1,4 @@
 
-# Definition of the x(t) signal as a lambda function
-x = lambda t : -ramp(t+2) *unit(-t-1) +\
-               (ramp(2*t+2)-1) * (unit(t+1)-unit(t)) +\
-               unit(t) - unit(t-2)
-
 # Defintion of systems that take a signal x as an input and return siganl f 
 fx_o = lambda x: lambda n:(x(n) - x(-n))/2
 fx_e = lambda x: lambda n: (x(n) + x(-n))/2

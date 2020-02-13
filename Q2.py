@@ -10,20 +10,12 @@ matplotlib.rcParams.update({
 # %%
 import numpy as np  
 import matplotlib.pyplot as plt 
+from collections.abc import Iterable
+from Q1 import x
 
-def unit(x):
-    return np.array([0 if i<0 else 1 for i in x ])
-
-def ramp(x):
-    return np.array([0 if i<0 else i for i in x])
 
 # %%
 #section:Q2_def
-
-# Definition of the x(t) signal as a lambda function
-x = lambda t : -ramp(t+2) *unit(-t-1) +\
-               (ramp(2*t+2)-1) * (unit(t+1)-unit(t)) +\
-               unit(t) - unit(t-2)
 
 # Defintion of systems that take a signal x as an input and return siganl f 
 fx_o = lambda x: lambda n:(x(n) - x(-n))/2
@@ -76,10 +68,7 @@ plt.savefig('doc/images/Q2-1.pgf')
 
 # %%
 #section:Q2_2
-# Definition of the x(t) signal as a lambda function
-x = lambda t : -ramp(t+2) *unit(-t-1) +\
-               (ramp(2*t+2)-1) * (unit(t+1)-unit(t)) +\
-               unit(t) - unit(t-2)
+
 fx_e = lambda x: lambda n: (x(n) + x(-n))/2
 fx_r = lambda x: lambda n: np.array([x(np.array([i]))[0] if i>=0 else 0 for i in n])
 x_e = fx_e(x)
