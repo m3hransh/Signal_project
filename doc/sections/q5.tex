@@ -1,2 +1,48 @@
 \section{Convolution}
-This is the answer to Question5.
+Convolution of signals $x_1[n]$ and $x_2[n]$ 
+that symbolicly represented as $ x_1[n]*x_2[n]$ 
+is as follow
+\begin{align}
+    y[n] = \sum_{k=-\infty}^{+\infty}x_1[k]x_2[n-k]
+    \label{conv}
+\end{align}
+\subsection{Q5.1}
+The implementation of equation 
+(\ref{conv}) has been Shown as one-line lambda 
+function in \textbf{Listing \ref{list:q5_1}}.
+
+\pythonexternal[caption={Convolution implementation in Python}, label={list:q5_1}]{codes/Q5_1.py}
+
+\subsection{Q5.2}
+
+Consider signals $x_1[n]$ and $x_2[n]$ 
+that has been defined below. Let's convolve them 
+using the convolution function that we have defined 
+in the previous section.
+
+\begin{center}
+\begin{tabular}{p{8cm}}
+    
+    $x_1[n] = (\frac{1}{2^{-n+1}}).(u[n+2]-u[n-2])$\\
+    \\
+    $x_2[n] = \begin{cases}
+        \sum_{k=-\infty}^{n}(sin(2k)+e^{j\pi k}).(u[k+3]-u[k-5]) &:0<n<7\\
+        0 &: O.W
+    \end{cases}$
+\end{tabular}    
+\end{center}
+\paragraph{} The implementation has been shown in 
+\textbf{Listing \ref{list:q5_2}}. After defining signals 
+$x_1[n]$ and $x_2[n]$ they have been convolved 
+using the \textbf{conv} function that returns 
+the convolution as another function. and after 
+that, they have been plotted. the result is in 
+\textbf{Figure \ref{fig:Q5_2}}.
+\pythonexternal[caption={Convolution of $x_1(n)$ and $ x_2(n) $ .}, label={list:q5_2}]{codes/Q5_2.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q5-2.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q5_2}}}
+  \label{fig:Q5_2}
+\end{figure}

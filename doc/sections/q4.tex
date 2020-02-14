@@ -1,2 +1,48 @@
 \section{Signal Energy}
-This is the answer to Question 4.
+In this section, we will define a general 
+function for calculating the signal energy. 
+the total energy in a discrete-time signal 
+$x[n]$ over the time interval $n_1 \leq n \leq n_2$ 
+is defined as:
+\begin{align}
+\sum_{n=n_1}^{n_2} |x[n]|^2
+\end{align}
+\subsection{Q4.1}
+The implementation in python is as simple 
+as this one line code:
+
+\begin{python}
+dt_energy = lambda x, n: sum([np.abs(x(i))**2 for i in n])
+\end{python}
+
+\paragraph{}Now let's amend the function to calculate 
+the continuous-time signal energy. The total energy 
+over the time interval $t_1 \leq t \leq t_2$ in a 
+continuous-time signal $x(t)$ is defined as
+
+\begin{align}
+\int_{t_1}^{t_2} |x(t)|^2dt
+\end{align}
+\paragraph{}But in practice, we can't precisely 
+calculate the integral, So instead, we can use Riemann sum as follow
+\begin{align}
+\mathop {\lim }\limits_{n \to \infty } \sum\limits_{i = 1}^n {|x\left( {t_i} \right)|^2\Delta t}
+\end{align}
+that $n$ is the number of samples and $\Delta t$ is the distance btween samples.
+
+\paragraph{}So for implementation, the only change that 
+we should do in comparison to the discrete-time signals 
+is to multiply each sample to the distance between them. 
+The code is like this:
+
+\begin{python}
+# d is the distance between samples
+ct_energy = lambda x, n, d: sum([np.abs(x(i))**2 for i in n])*s
+\end{python}
+
+\subsection{Q4.2}
+ 
+
+\pythonexternal[caption={Calculating energy of signals $x(t),y_1(t)$ and $ y_2(t) $}, label={list:q4_2}]{codes/Q4_2.py}
+
+\lstinputlisting[language=bash,style=mystyle,caption={Output of \textbf{Listings \ref{list:q4_2}}}]{codes/Q4_2_out.txt}
