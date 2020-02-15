@@ -1,7 +1,7 @@
-This is simple Signal and System project for implementing some basic concepts and examples in Python programming language.
+This is a simple Signal and System project for implementing some basic concepts and examples in Python programming language.
 ## Installation
 Make sure to have python3 installed in your machine.
-then install this package by pip or using 
+then install this package by pip or simply use Anaconda. this is how you can install them with pip:
 ``` bash
 $pip install matplotlib
 $pip install numpy
