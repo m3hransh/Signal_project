@@ -18,7 +18,7 @@ $python script.py Q1.py
 that will find codes between #section:<name> and #endsection and create a file <name>.py file in doc/codes folder.
   
 ## Runing codes
-I have saved graphs in .pgf format in doc/images dir. For runing and seeing graphs in defferent backend use the code blow at top of the python scripts to spcify your backend:
+I have saved graphs in .pgf format in doc/images dir. For runing and seeing graphs in defferent backend use the code below at top of the python scripts to spcify your backend:
 ```python
 import matplotlib
 matplotlib.use('<your_backend>')
