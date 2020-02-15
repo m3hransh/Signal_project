@@ -13,7 +13,10 @@ ax2 = plt.subplot2grid(gridsize,(0,1))
 ax3 = plt.subplot2grid(gridsize,(1,0),colspan=2)
 
 ax1.stem(n,x1(n),use_line_collection=True)
+ax1.set_title("$x_1[n]$")
 ax2.stem(n,x2(n).real,use_line_collection=True)
+ax2.set_title("$|x_2[n]|$")
 ax3.stem(n, x3(n).real,use_line_collection=True)
+ax3.set_title('|x_1[n]*x_2[n]|')
 
 fig.show()

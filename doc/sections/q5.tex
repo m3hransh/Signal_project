@@ -46,3 +46,69 @@ that, they have been plotted. the result is in
   \caption{Result graph of the \textbf{Listing \ref{list:q5_2}}}
   \label{fig:Q5_2}
 \end{figure}
+
+\subsection{Q5.3}
+In this section, we implement block convolution on 
+two signals and compare them to the simple 
+convolution to see if it works correctly. 
+For block convolution, we first divide the 
+signal to blocks and then convolve them separately 
+and sum the results. consider following $x[n]$ that we
+divide it to block with lenght of L.
+
+\begin{align}
+x[n] = \sum_{r=0}^{\infty}x_r[n-rL]
+\end{align}
+which $P>L$ and $x_r[n]$ is as following
+\begin{align}
+  x_r[n] = \begin{cases}
+        x[n+rL] &:0<n<L-1\\
+        0 &: O.W
+    \end{cases}
+\end{align}
+
+For instance, we imply this in the following signals 
+
+\begin{center}
+\begin{tabular}{p{8cm}}
+    
+    $x[n] = cos(n^2)sin(\frac{2\pi n}{5})$\\
+    \\
+    $h[n] = (0.9^n)(u[n] - u[n-10])$
+\end{tabular}    
+\end{center}
+\paragraph{}Now first divide the signal x[n] with $L=50$ into 
+two blocks, first block $x_0[n]$, second block $x_1[n]$.
+Now we calculate $y_0[n] =x_0[n] * h[n]$ and $y_1[n] = x_1[n] 
+* h[n]$. and using the equation below to calculate 
+total convolution of $x[n]$ and $h[n]$.
+
+\begin{align}
+  y[n] = x[n] *h[n] = y_0[n] + y_1[n-L]
+\end{align}
+
+
+
+the implementation in Python has 
+been shown in \textbf{Listing \ref{list:q5_3_1}}. After defining 
+signals they convolved using \textbf{Numpy.convolve}.
+\pythonexternal[caption={Definition of signals that have been defined}, label={list:q5_3_1}]{codes/Q5_3_1.py}
+
+
+\paragraph{}In the \textbf{Listing \ref{list:q5_3_2}} the 
+signals that have been defined in \textbf{Listing \ref{list:q5_3_1}}, have been plotted using 
+\textbf{plt.stem}. The result graph has been 
+shown in \textbf{Figure \ref{fig:Q5_3}}. As you can see, the 
+total convolution and the block convolution that has 
+calculated using the equation \ref{fig:Q5_3} are the same.
+
+
+
+\pythonexternal[caption={Plotting signals}, label={list:q5_3_2}]{codes/Q5_3_2.py}
+
+\begin{figure}[H]
+  \centering
+  \scalebox{0.4}{\input{images/Q5-3.pgf}}
+  \caption{Result graph of the \textbf{Listing \ref{list:q5_3_2}}}
+  \label{fig:Q5_3}
+\end{figure}
